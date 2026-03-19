@@ -444,159 +444,269 @@
         evt.currentTarget.classList.add("active");
     }
 </script>
-<!-- История матчей сверху -->
-<div class="match-history-stripe">
-    <div class="match-history-container">
-        <!-- Пример одного матча (Победа) -->
-        <div class="match-card win">
-            <span class="match-status">WIN</span>
-            <img src="https://via.placeholder.com/20" alt="logo" class="opp-logo">
-            <span class="opponent">NAVI</span>
-            <span class="score">16:10</span>
-        </div>
+    <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #00d4ff;
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --win: #22c55e;
+            --loss: #ef4444;
+        }
 
-        <!-- Пример матча (Поражение) -->
-        <div class="match-card loss">
-            <span class="match-status">LOSS</span>
-            <img src="https://via.placeholder.com/20" alt="logo" class="opp-logo">
-            <span class="opponent">Liquid</span>
-            <span class="score">12:16</span>
-        </div>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
 
-        <!-- Еще матчи -->
-        <div class="match-card win">
-            <span class="match-status">WIN</span>
-            <img src="https://via.placeholder.com/20" alt="logo" class="opp-logo">
-            <span class="opponent">Vitality</span>
-            <span class="score">2:1</span>
-        </div>
+        /* 1. ИСТОРИЯ МАТЧЕЙ (СВЕРХУ) */
+        .match-history-bar {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(10px);
+        }
 
-        <div class="match-card win">
-            <span class="match-status">WIN</span>
-            <img src="https://via.placeholder.com/20" alt="logo" class="opp-logo">
-            <span class="opponent">G2</span>
-            <span class="score">16:5</span>
+        .match-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .win { color: var(--win); border: 1px solid var(--win); }
+        .win-dot { background-color: var(--win); }
+        .loss { color: var(--loss); border: 1px solid var(--loss); }
+        .loss-dot { background-color: var(--loss); }
+
+        /* 2. ГЛАВНОЕ МЕНЮ */
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background: var(--card-bg);
+            margin-bottom: 50px;
+        }
+
+        .menu-items {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-items li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .menu-items li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* КНОПКА ОТКРЫТИЯ ЗАЯВКИ */
+        .join-btn {
+            background: var(--primary-color);
+            color: #000;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 100px auto;
+            transition: transform 0.2s;
+        }
+
+        .join-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* 3. МОДАЛЬНОЕ ОКНО (ФОРМА ЗАЯВКИ) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none; /* Скрыто по умолчанию */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .application-form {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .application-form h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--win);
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-modal {
+            color: #94a3b8;
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ИСТОРИЯ МАТЧЕЙ -->
+    <div class="match-history-bar">
+        <div class="match-item win">
+            <span class="status-dot win-dot"></span>
+        </div>
+        <div class="match-item win">
+            <span class="status-dot win-dot"></span>
+        </div>
+        <div class="match-item loss">
+            <span class="status-dot loss-dot"></span>
+            VS FaZe Clan • 9:13
+        </div>
+        <div class="match-item win">
+            <span class="status-dot win-dot"></span>
+            VS Vitality • 2:1
         </div>
     </div>
-</div>
 
-<!-- Кнопка вступления в команду (фиксированная сбоку или снизу) -->
-<a href="#join-form" class="join-team-btn">
-    <span class="btn-icon">+</span>
-    СТАТЬ ЧАСТЬЮ КОМАНДЫ
-</a>
-/* Общие настройки для шрифтов, если еще нет */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #0b0e11;
-    color: white;
-}
+    <!-- ГЛАВНОЕ МЕНЮ -->
+    <nav class="main-menu">
+        <ul class="menu-items">
+            <li><a href="#">Главная</a></li>
+            <li><a href="#">Состав</a></li>
+            <li><a href="#">Турниры</a></li>
+            <li><a href="#">Магазин</a></li>
+            <li><a href="#">Медиа</a></li>
+        </ul>
+    </nav>
 
-/* --- СТИЛИ ИСТОРИИ МАТЧЕЙ --- */
-.match-history-stripe {
-    background: #14171c;
-    border-bottom: 2px solid #2d323a;
-    width: 100%;
-    overflow-x: auto; /* Позволяет скроллить, если матчей много */
-    white-space: nowrap;
-}
+    <!-- Кнопка для вызова формы -->
+    <button class="join-btn" onclick="openModal()">ВСТУПИТЬ В КОМАНДУ</button>
 
-.match-history-container {
-    display: flex;
-    padding: 10px 20px;
-    gap: 15px;
-    align-items: center;
-}
+    <!-- МОДАЛЬНОЕ ОКНО ЗАЯВКИ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="application-form">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Заявка в Team</h2>
+            <form id="teamForm">
+                <div class="form-group">
+                    <label>Никнейм</label>
+                    <input type="text" placeholder="Введите ваш ник" required>
+                </div>
+                <div class="form-group">
+                    <label>Ваша роль</label>
+                    <select>
+                        <option>Рифлер</option>
+                        <option>Снайпер (AWP)</option>
+                        <option>Капитан (IGL)</option>
+                        <option>Саппорт</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ранг / ELO</label>
+                    <input type="number" placeholder="Например, 2500" required>
+                </div>
+                <div class="form-group">
+                    <label>О себе</label>
+                    <textarea rows="4" placeholder="Расскажите о своем опыте..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">ОТПРАВИТЬ ЗАЯВКУ</button>
+            </form>
+        </div>
+    </div>
 
-.match-card {
-    display: flex;
-    align-items: center;
-    background: #1c2127;
-    padding: 5px 12px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: bold;
-    border-left: 4px solid #555;
-}
+    <script>
+        // Функции для управления модальным окном
+        function openModal() {
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
 
-/* Цвета для побед и поражений */
-.match-card.win { border-left-color: #00ff88; }
-.match-card.loss { border-left-color: #ff4655; }
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
 
-.match-status {
-    margin-right: 10px;
-    font-size: 10px;
-}
+        // Закрытие при клике вне окна
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalOverlay');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
 
-.win .match-status { color: #00ff88; }
-.loss .match-status { color: #ff4655; }
-
-.opp-logo {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    border-radius: 50%;
-}
-
-.opponent {
-    margin-right: 10px;
-    color: #ccc;
-}
-
-.score {
-    color: #fff;
-    background: #2d323a;
-    padding: 2px 6px;
-    border-radius: 3px;
-}
-
-/* --- СТИЛИ КНОПКИ ЗАЯВКИ --- */
-.join-team-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: linear-gradient(45deg, #ff4655, #ff7681);
-    color: white;
-    text-decoration: none;
-    padding: 15px 25px;
-    border-radius: 50px;
-    font-weight: bold;
-    box-shadow: 0 10px 20px rgba(255, 70, 85, 0.3);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-    letter-spacing: 1px;
-}
-
-.join-team-btn:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 25px rgba(255, 70, 85, 0.5);
-    background: linear-gradient(45deg, #ff7681, #ff4655);
-}
-
-.btn-icon {
-    background: rgba(255, 255, 255, 0.2);
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-right: 10px;
-    font-size: 18px;
-}
-
-/* Адаптивность для мобилок */
-@media (max-width: 600px) {
-    .join-team-btn {
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 18px;
-        font-size: 12px;
-    }
-}
-
+        // Обработка формы
+        document.getElementById('teamForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert('Заявка успешно отправлена! Менеджер свяжется с вами.');
+            closeModal();
+        }
+    </script>
 </body>
 </html>
+
