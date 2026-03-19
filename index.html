@@ -294,9 +294,17 @@
     <title>Xirex Team | Official Site</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xirex Team | HLTV Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
         :root {
-            /* СЮДА ВСТАВЬ ПРЯМУЮ ССЫЛКУ НА КАРТИНКУ (cdn.discordapp.com...) */
-            --avatar-url: url('https://discord.com/channels/@me/1459946897153200150/1484268777443954791');
+            /* ЗАМЕНИ ЭТУ ССЫЛКУ НА ПРЯМУЮ ИЗ ДИСКОРДА (cdn.discordapp.com...) */
+            --avatar-url: url('https://i.imgur.com/qU7iI0v.jpeg'); 
             
             --hltv-bg: #e6e9ee;
             --hltv-nav: #2d3848;
@@ -306,22 +314,21 @@
             --hltv-border: #ccc;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--hltv-bg); color: #333; }
 
-        /* ШАПКА */
-        header { background: var(--hltv-dark-blue); color: #fff; }
+        header { background: var(--hltv-dark-blue); color: #fff; position: sticky; top: 0; z-index: 1000; }
         .top-bar { display: flex; justify-content: space-between; padding: 10px 10%; background: #151b22; align-items: center;}
         .logo { font-size: 24px; font-weight: bold; color: #fff; text-decoration: none; text-transform: uppercase; }
         .logo span { color: #5dade2; }
 
         nav { background: var(--hltv-nav); display: flex; justify-content: center; border-bottom: 3px solid var(--hltv-accent); }
         nav a { color: #fff; text-decoration: none; padding: 12px 20px; font-size: 13px; font-weight: bold; text-transform: uppercase; }
+        nav a:hover { background: var(--hltv-accent); }
 
-        /* КОНТЕНТ */
         .container { display: grid; grid-template-columns: 1fr 350px; gap: 20px; padding: 20px 10%; }
 
-        .column-title {https://discord.com/channels/@me/1459946897153200150/1484268777443954791
+        .column-title {
             background: var(--hltv-nav);
             color: #fff;
             padding: 8px 12px;
@@ -329,10 +336,11 @@
             text-transform: uppercase;
             font-weight: bold;
             margin-bottom: 10px;
+            margin-top: 20px;
         }
 
-        /* КАРТОЧКА ИГРОКА (СТИЛЬ HLTV) */
-        .player-row {https://discord.com/channels/@me/1459946897153200150/1484268777443954791
+        /* КАРТОЧКА ИГРОКА */
+        .player-row {
             display: flex;
             align-items: center;
             padding: 8px 12px;
@@ -340,16 +348,138 @@
             border-bottom: 1px solid #eee;
             text-decoration: none;
             color: inherit;
-            transition: 0.2s;
         }
-        .player-row:hover { background: #f0f4f8; }
-
-        /* ФОТО ИГРОКА */
-        .player-photo {https://discord.com/channels/@me/1459946897153200150/1484268777443954791
-            width: 55px;
-            height: 55px;
+        .player-photo {
+            width: 50px;
+            height: 50px;
             background-image: var(--avatar-url);
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            margin-right: 15px;
+            background-color: #ddd;
+            border: 1px solid #ccc;
+        }
+        .player-info { flex-grow: 1; }
+        .nick { font-weight: bold; font-size: 16px; color: var(--hltv-accent); }
+        .role { font-size: 11px; color: #888; text-transform: uppercase; font-weight: bold; }
+        .rating { font-weight: bold; color: #5cb85c; font-size: 14px; }
 
+        .roster-card { background: #fff; border: 1px solid var(--hltv-border); margin-bottom: 10px; }
+        .section-label { padding: 8px 12px; font-size: 11px; font-weight: bold; color: #777; background: #f9f9f9; text-transform: uppercase; border-bottom: 1px solid #eee; }
+
+        /* ПУСТЫЕ БЛОКИ */
+        .empty-box {
+            background: #fff;
+            border: 1px solid var(--hltv-border);
+            padding: 40px;
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            font-size: 14px;
+        }
+        .empty-box i { display: block; font-size: 30px; margin-bottom: 10px; color: #ddd; }
+
+        /* BENCH */
+        .bench-item { padding: 8px 12px; font-size: 13px; border-bottom: 1px dotted #eee; background: #fff; }
+        .bench-nick { font-weight: bold; color: #555; }
+
+        footer { background: var(--hltv-dark-blue); color: #777; text-align: center; padding: 40px; margin-top: 40px; font-size: 12px; }
+
+        @media (max-width: 1000px) { .container { grid-template-columns: 1fr; padding: 10px; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <a href="#" class="logo">XIREX<span>TEAM</span></a>
+            <div style="font-size: 13px; color: #5dade2;"><i class="fas fa-users"></i> Профиль команды</div>
+        </div>
+        <nav>
+            <a href="#roster">Состав</a>
+            <a href="#matches">Матчи</a>
+            <a href="#achievements">Достижения</a>
+            <a href="#info">Информация</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <main>
+            <!-- СОСТАВ -->
+            <div id="roster">
+                <div class="column-title">Состав Xirex Team</div>
+                <div class="roster-card">
+                    <div class="section-label">Main Roster</div>
+                    <!-- Игроки Main -->
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">mef0mu</div><div class="role">Rifler</div></div><div class="rating">1.00</div></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">xinto</div><div class="role">Entry</div></div><div class="rating">1.00</div></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">Kaze</div><div class="role">Sniper</div></div><div class="rating">1.00</div></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">Ba7ka</div><div class="role">IGL</div></div><div class="rating">1.00</div></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">blitzn0n</div><div class="role">Lurker</div></div><div class="rating">1.00</div></div>
+
+                    <div class="section-label">Academy Roster</div>
+                    <!-- Игроки Academy -->
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">fla1</div><div class="role">Sniper / IGL</div></div><div class="rating">1.00</div
+></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">Csuchs</div><div class="role">Lurker</div></div><div class="rating">1.00</div></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">sos1ska</div><div class="role">Rifler</div></div><div class="rating">1.00</div></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">friz</div><div class="role">Support</div></div><div class="rating">1.00</div></div>
+                    <div class="player-row"><div class="player-photo"></div><div class="player-info"><div class="nick">well666</div><div class="role">Rifler</div></div><div class="rating">1.00</div></div>
+                </div>
+            </div>
+
+            <!-- МАТЧИ -->
+            <div id="matches">
+                <div class="column-title">Предстоящие матчи</div>
+                <div class="empty-box">
+                    <i class="fas fa-calendar-times"></i>
+                    На данный момент запланированных матчей нет.
+                </div>
+            </div>
+
+            <!-- ДОСТИЖЕНИЯ -->
+            <div id="achievements">
+                <div class="column-title">Достижения</div>
+                <div class="empty-box">
+                    <i class="fas fa-trophy"></i>
+                    Список достижений пока пуст.
+                </div>
+            </div>
+
+            <!-- ИНФОРМАЦИЯ -->
+            <div id="info">
+                <div class="column-title">Информация</div>
+                <div class="empty-box">
+                    <i class="fas fa-info-circle"></i>
+                    Подробная информация об организации будет добавлена позже.
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <div class="column-title">Bench (Запасные)</div>
+            <div class="roster-card">
+                <div class="bench-item"><span class="bench-nick">TOQWR</span> — Rifler</div>
+                <div class="bench-item"><span class="bench-nick">Flix</span> — IGL</div>
+                <div class="bench-item"><span class="bench-nick">aga</span> — Entry</div>
+            </div>
+
+            <div class="column-title">Соцсети</div>
+            <div style="background:#fff; padding:15px; border:1px solid #ccc; display: flex; justify-content: space-around; font-size: 20px;">
+                <a href="#" style="color: #206191;"><i class="fab fa-vk"></i></a>
+                <a href="#" style="color: #206191;"><i class="fab fa-telegram"></i></a>
+                <a href="#" style="color: #206191;"><i class="fab fa-twitch"></i></a>
+                <a href="#" style="color: #206191;"><i class="fab fa-youtube"></i></a>
+            </div>
+        </aside>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Xirex Team | HLTV Style Project</p>
+    </footer>
 
 </body>
 </html>
