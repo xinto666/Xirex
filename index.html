@@ -628,11 +628,9 @@
         </div>
         <div class="match-item loss">
             <span class="status-dot loss-dot"></span>
-            VS FaZe Clan • 9:13
         </div>
         <div class="match-item win">
             <span class="status-dot win-dot"></span>
-            VS Vitality • 2:1
         </div>
     </div>
 
@@ -641,9 +639,6 @@
         <ul class="menu-items">
             <li><a href="#">Главная</a></li>
             <li><a href="#">Состав</a></li>
-            <li><a href="#">Турниры</a></li>
-            <li><a href="#">Магазин</a></li>
-            <li><a href="#">Медиа</a></li>
         </ul>
     </nav>
 
@@ -655,27 +650,28 @@
         <div class="application-form">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h2>Заявка в Team</h2>
-            <form id="teamForm">
+            <!-- Изменения здесь: action и method, а также name атрибуты -->
+            <form id="teamForm" action="submit_application.php" method="POST">
                 <div class="form-group">
-                    <label>Никнейм</label>
-                    <input type="text" placeholder="Введите ваш ник" required>
+                    <label for="nickname">Никнейм</label>
+                    <input type="text" id="nickname" name="nickname" placeholder="Введите ваш ник" required>
                 </div>
                 <div class="form-group">
-                    <label>Ваша роль</label>
-                    <select>
-                        <option>Рифлер</option>
-                        <option>Снайпер (AWP)</option>
-                        <option>Капитан (IGL)</option>
-                        <option>Саппорт</option>
+<label for="role">Ваша роль</label>
+                    <select id="role" name="role">
+                        <option value="Rifler">Рифлер</option>
+                        <option value="AWP">Снайпер (AWP)</option>
+                        <option value="IGL">Капитан (IGL)</option>
+                        <option value="Support">Саппорт</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Ранг / ELO</label>
-                    <input type="number" placeholder="Например, 2500" required>
+                    <label for="elo">Ранг / ELO</label>
+                    <input type="number" id="elo" name="elo" placeholder="Например, 2500" required>
                 </div>
                 <div class="form-group">
-                    <label>О себе</label>
-                    <textarea rows="4" placeholder="Расскажите о своем опыте..."></textarea>
+                    <label for="about">О себе</label>
+                    <textarea id="about" name="about" rows="4" placeholder="Расскажите о своем опыте..."></textarea>
                 </div>
                 <button type="submit" class="submit-btn">ОТПРАВИТЬ ЗАЯВКУ</button>
             </form>
@@ -699,14 +695,89 @@
                 closeModal();
             }
         }
-
-        // Обработка формы
-        document.getElementById('teamForm').onsubmit = function(e) {
-            e.preventDefault();
-            alert('Заявка успешно отправлена! Менеджер свяжется с вами.');
-            closeModal();
-        }
+        
+        // Удаляем JS-обработчик формы, т.к. форму теперь отправляет PHP
+        // document.getElementById('teamForm').onsubmit = function(e) { /* ... */ } 
     </script>
+    <?php
+
+// --- ВАЖНО: Замените эти значения на свои! ---
+$botToken = "8762471438:AAF7zshLDjPYTvcqiGOtFaR0QCbPwqKbbGY";
+$chatId = "8762471438";     // Например: 123456789 или -123456789 (для групп)
+// ------------------------------------------
+
+// Проверяем, что запрос был отправлен методом POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Получаем данные из формы и очищаем их от потенциально опасных символов
+    $nickname = htmlspecialchars($_POST['nickname'] ?? 'N/A');
+    $role = htmlspecialchars($_POST['role'] ?? 'N/A');
+    $elo = htmlspecialchars($_POST['elo'] ?? 'N/A');
+    $about = htmlspecialchars($_POST['about'] ?? 'Нет информации');
+    $timestamp = date("Y-m-d H:i:s"); // Время подачи заявки
+
+    // Формируем текст сообщения для Telegram
+    // Используем Markdown для форматирования
+    $message = "🎉 *Новая заявка в команду!* 🎉\n";
+    $message .= "----------------------------------\n";
+    $message .= "*Никнейм:* `$nickname`\n"; // Моноширинный шрифт для никнейма
+    $message .= "*Роль:* $role\n";
+    $message .= "*Ранг / ELO:* $elo\n";
+    $message .= "*О себе:*\n\n$about\n
+    ```\n"; // Блок кода для раздела "О себе"
+  $message .= "----------------------------------\n";
+  $message .= "×Время подачи:× $timestamp\n";
+  $message .= "Отправлено с сайта: " . $_SERVER['HTTP_REFERER']; // Добавляем ссылку на страницу, откуда отправлена форма
+
+  // URL для отправки сообщения через Telegram Bot API
+  $telegramApiUrl = "https://api.telegram.org/bot" . $botToken . "/sendMessage";
+
+  // Параметры для отправки
+  $data = [
+    'chat_id' => $chatId,
+    'text' => $message,
+    'parse_mode' => 'Markdown' // Указываем, что используем Markdown
+  ];
+
+  // Инициализация cURL для отправки HTTP запроса
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $telegramApiUrl);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Получить ответ как строку
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Отключить проверку SSL (для некоторых серверов может быть нужно)
+
+  $response = curl_exec($ch); // Выполняем запрос
+  $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE); // Получаем HTTP-статус ответа
+
+  if (curl_errno($ch)) {
+    // Ошибка cURL
+    error_log("cURL Error: " . curl_error($ch));
+    // Можно перенаправить пользователя на страницу ошибки или показать сообщение
+    header("Location: index.html?status=telegram_error");
+    exit();
+  }
+
+  curl_close($ch); // Закрываем cURL сессию
+
+  $result = json_decode($response, true);
+
+  if ($httpCode == 200 && $result['ok'] === true) {
+    // Успешно отправлено
+    header("Location: index.html?status=success"); // Перенаправляем на главную страницу с сообщением об успехе
+    exit();
+  } else {
+    // Ошибка Telegram API
+    error_log("Telegram API Error: " . $response);
+    header("Location: index.html?status=telegram_api_error"); // Перенаправляем с сообщением об ошибке
+    exit();
+  }
+
+} else {
+  // Если кто-то пытается получить доступ к этому файлу напрямую (не через POST-запрос формы)
+  header("Location: index.html"); // Перенаправляем на главную страницу
+  exit();
+}
+
+?>
 </body>
 </html>
-
