@@ -23,6 +23,52 @@
             transform: translateY(-10px);
             border-color: #3b82f6;
             transition: all 0.3s ease;
+            /* Основной агрессивный класс */
+.font-aggressive {
+    font-family: 'Russo One', sans-serif;
+    text-transform: uppercase; /* Всегда заглавные */
+    font-style: italic; /* Наклон придает скорость */
+    letter-spacing: -1px; /* Сжатые буквы выглядят агрессивнее */
+    
+    /* Эффект тени и объема */
+    text-shadow: 3px 3px 0px #be123c; /* Темно-красный контур */
+    
+    /* Цвет градиентом от белого к светло-серому */
+    background: linear-gradient(180deg, #ffffff 40%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Небольшой наклон всего блока для динамики */
+    display: inline-block;
+    transform: skewX(-5deg);
+}
+
+/* Эффект при наведении на заголовки */
+.font-aggressive:hover {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8));
+    transition: all 0.2s ease-in-out;
+}
+
+/* Специальный стиль для названия команды */
+.team-name-glitch {
+    font-family: 'Russo One', sans-serif;
+    font-size: clamp(3rem, 10vw, 6rem); /* Адаптивный размер */
+    line-height: 0.9;
+    position: relative;
+    color: white;
+}
+            <!-- Название команды в Hero секции -->
+<h1 class="team-name-glitch font-aggressive" data-aos="zoom-in">
+    9ezEsports
+</h1>
+
+<!-- Заголовки секций -->
+<h2 class="font-aggressive text-3xl mb-12 border-l-4 border-blue-600 pl-4">
+    Main Roster
+</h2>
+
+<!-- Ники игроков -->
+<h3 class="font-aggressive text-xl tracking-tighter">xinto</h3>
         }
     </style>
 </head>
