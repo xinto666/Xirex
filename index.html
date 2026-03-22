@@ -1,43 +1,373 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9ezEsports</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>9ezEsports | CS2 Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css&quot; rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap&quot; rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .font-gaming { font-family: 'Orbitron', sans-serif; }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .player-card:hover {
+            transform: translateY(-10px);
+            border-color: #3b82f6;
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>9ezEsports</h1>
-            <p>Киберспортивная команда по CS2</p>
-        </header>
-        
-        <section class="roster">
-            <h2>Состав команды</h2>
-            <ul>
-                <li>xinto - IGL</li>
-                <li>ba7ka - Lurker</li>
-                <li>kaze - Sniper</li>
-                <li>blitzn0n - Rifler</li>
-                <li>mef0mu - Entry Fragger</li>
-            </ul>
-        </section>
+<body class="overflow-x-hidden">
 
-        <section class="matches">
-            <h2>Матчи</h2>
-            <p>Здесь будет информация о матчах.</p>
-        </section>
+    <!-- Навигация -->
+    <nav class="fixed w-full z-50 glass py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- ЛОГОТИП ТУТ -->
+                <img src="https://via.placeholder.com/50&quot; alt="9ezEsports Logo" class="w-10 h-10 rounded-full">
+                <span class="font-gaming text-xl font-bold tracking-wider">9ezEsports</span>
+            </div>
+            <div class="hidden md:flex gap-8 font-semibold text-sm uppercase tracking-widest">
+                <a href="#roster" class="hover:text-blue-500 transition">Ростер</a>
+                <a href="#matches" class="hover:text-blue-500 transition">Матчи</a>
+                <a href="#achievements" class="hover:text-blue-500 transition">Достижения</a>
+                <a href="#info" class="hover:text-blue-500 transition">Инфо</a>
+            </div>
+            <!-- Мобильное меню (упрощенное) -->
+            <div class="md:hidden">
+                <button id="menuBtn" class="text-white focus:outline-none text-2xl">☰</button>
+            </div>
+        </div>
+    </nav>
 
-        <section class="achievements">
-            <h2>Достижения</h2>
-            <p>Здесь будет информация о достижениях.</p>
-        </section>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
+        <div class="absolute w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] -z-10"></div>
 
-        <section class="info">
-            <h2>Информация</h2>
-            <p>Здесь будет дополнительная информация.</p>
-        </section>
-    </div>
+        <h1 class="font-gaming text-6xl md:text-8xl mb-4 animate-pulse uppercase" data-aos="zoom-in">9ezEsports</h1>
+        <p class="text-gray-400 text-lg md:text-2xl tracking-[0.3em] uppercase" data-aos="fade-up" data-aos-delay="200">Counter-Strike 2 Team</p>
+    </section>
+
+    <!-- ROSTER SECTION -->
+    <section id="roster" class="py-20 container mx-auto px-6">
+        <h2 class="font-gaming text-3xl mb-12 text-center border-b-2 border-blue-600 inline-block" data-aos="fade-right">Main Roster</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            
+            <!-- Игрок 1 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                     <img src="https://via.placeholder.com/100&quot; alt="xinto">
+                </div>
+                <h3 class="font-gaming text-xl">xinto</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">IGL</p>
+            </div>
+
+            <!-- Игрок 2 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100&quot; alt="ba7ka">
+                </div>
+                <h3 class="font-gaming text-xl">
+
+
+ba7ka</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Lurker</p>
+            </div>
+
+            <!-- Игрок 3 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100" alt="mef0mu">
+                </div>
+                <h3 class="font-gaming text-xl">mef0mu</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Entryfragger</p>
+            </div>
+
+            <!-- Игрок 4 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100" alt="blitzn0n">
+                </div>
+                <h3 class="font-gaming text-xl">blitzn0n</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Rifler</p>
+            </div>
+
+            <!-- Игрок 5 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="500">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100" alt="kaze">
+                </div>
+                <h3 class="font-gaming text-xl">kaze</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Sniper</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MATCHES -->
+    <section id="matches" class="py-20 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Предстоящие -->
+                <div data-aos="fade-right">
+                    <h2 class="font-gaming text-2xl mb-8">Предстоящие матчи</h2>
+                    <div class="glass p-8 rounded-xl
+
+text-gray-500 text-center italic">
+                        На данный момент матчей не запланировано.
+                    </div>
+                </div>
+                <!-- Прошедшие -->
+                <div data-aos="fade-left">
+                    <h2 class="font-gaming text-2xl mb-8">Последние матчи</h2>
+                    <div class="glass p-8 rounded-xl text-gray-500 text-center italic">
+                        История матчей пуста.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="py-20 container mx-auto px-6">
+        <h2 class="font-gaming text-3xl mb-12 text-center" data-aos="fade-up">Достижения</h2>
+        <div class="max-w-4xl mx-auto space-y-4" data-aos="fade-up">
+            <div class="glass p-4 rounded-lg flex justify-between items-center">
+                <span class="text-gray-400 italic">Список достижений пока пуст. Команда готовится к турнирам.</span>
+                <span class="text-blue-500 font-bold">#2024</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section id="info" class="py-20 bg-slate-900/50">
+        <div class="container mx-auto px-6 text-center max-w-2xl" data-aos="zoom-in">
+            <h2 class="font-gaming text-3xl mb-8">Инфо</h2>
+            <p class="text-gray-400 leading-relaxed">
+                Здесь будет информация о создании организации 9ezEsports, её целях и истории. 
+                В данный момент страница находится в стадии наполнения.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-white/10 text-center">
+        <p class="text-gray-500 text-sm">&copy; 2024 9ezEsports. All rights reserved.</p>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></
+
+
+script>
+    <script>
+        // Инициализация анимаций
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out',
+        });
+
+        // Простая логика для мобильного меню (можно доработать)
+        const menuBtn = document.getElementById('menuBtn');
+        menuBtn.addEventListener('click', () => {
+            alert('Навигация: Ростер, Матчи, Достижения, Инфо');
+        });
+    </script>
 </body>
-</html>
+</html><!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9ezEsports | CS2 Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css&quot; rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap&quot; rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .font-gaming { font-family: 'Orbitron', sans-serif; }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .player-card:hover {
+            transform: translateY(-10px);
+            border-color: #3b82f6;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Навигация -->
+    <nav class="fixed w-full z-50 glass py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- ЛОГОТИП ТУТ -->
+                <img src="https://via.placeholder.com/50&quot; alt="9ezEsports Logo" class="w-10 h-10 rounded-full">
+                <span class="font-gaming text-xl font-bold tracking-wider">9ezEsports</span>
+            </div>
+            <div class="hidden md:flex gap-8 font-semibold text-sm uppercase tracking-widest">
+                <a href="#roster" class="hover:text-blue-500 transition">Ростер</a>
+                <a href="#matches" class="hover:text-blue-500 transition">Матчи</a>
+                <a href="#achievements" class="hover:text-blue-500 transition">Достижения</a>
+                <a href="#info" class="hover:text-blue-500 transition">Инфо</a>
+            </div>
+            <!-- Мобильное меню (упрощенное) -->
+            <div class="md:hidden">
+                <button id="menuBtn" class="text-white focus:outline-none text-2xl">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
+        <div class="absolute w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] -z-10"></div>
+
+        <h1 class="font-gaming text-6xl md:text-8xl mb-4 animate-pulse uppercase" data-aos="zoom-in">9ezEsports</h1>
+        <p class="text-gray-400 text-lg md:text-2xl tracking-[0.3em] uppercase" data-aos="fade-up" data-aos-delay="200">Counter-Strike 2 Team</p>
+    </section>
+
+    <!-- ROSTER SECTION -->
+    <section id="roster" class="py-20 container mx-auto px-6">
+        <h2 class="font-gaming text-3xl mb-12 text-center border-b-2 border-blue-600 inline-block" data-aos="fade-right">Main Roster</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            
+            <!-- Игрок 1 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                     <img src="https://via.placeholder.com/100&quot; alt="xinto">
+                </div>
+                <h3 class="font-gaming text-xl">xinto</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">IGL</p>
+            </div>
+
+            <!-- Игрок 2 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100&quot; alt="ba7ka">
+                </div>
+                <h3 class="font-gaming text-xl">
+
+
+ba7ka</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Lurker</p>
+            </div>
+
+            <!-- Игрок 3 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100" alt="mef0mu">
+                </div>
+                <h3 class="font-gaming text-xl">mef0mu</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Entryfragger</p>
+            </div>
+
+            <!-- Игрок 4 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100" alt="blitzn0n">
+                </div>
+                <h3 class="font-gaming text-xl">blitzn0n</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Rifler</p>
+            </div>
+
+            <!-- Игрок 5 -->
+            <div class="player-card glass p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="500">
+                <div class="w-24 h-24 bg-gray-700 rounded-full mx-auto mb-4 overflow-hidden border-2 border-blue-500">
+                    <img src="https://via.placeholder.com/100" alt="kaze">
+                </div>
+                <h3 class="font-gaming text-xl">kaze</h3>
+                <p class="text-blue-400 text-sm font-bold uppercase mt-1">Sniper</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MATCHES -->
+    <section id="matches" class="py-20 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Предстоящие -->
+                <div data-aos="fade-right">
+                    <h2 class="font-gaming text-2xl mb-8">Предстоящие матчи</h2>
+                    <div class="glass p-8 rounded-xl
+
+text-gray-500 text-center italic">
+                        На данный момент матчей не запланировано.
+                    </div>
+                </div>
+                <!-- Прошедшие -->
+                <div data-aos="fade-left">
+                    <h2 class="font-gaming text-2xl mb-8">Последние матчи</h2>
+                    <div class="glass p-8 rounded-xl text-gray-500 text-center italic">
+                        История матчей пуста.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="py-20 container mx-auto px-6">
+        <h2 class="font-gaming text-3xl mb-12 text-center" data-aos="fade-up">Достижения</h2>
+        <div class="max-w-4xl mx-auto space-y-4" data-aos="fade-up">
+            <div class="glass p-4 rounded-lg flex justify-between items-center">
+                <span class="text-gray-400 italic">Список достижений пока пуст. Команда готовится к турнирам.</span>
+                <span class="text-blue-500 font-bold">#2024</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section id="info" class="py-20 bg-slate-900/50">
+        <div class="container mx-auto px-6 text-center max-w-2xl" data-aos="zoom-in">
+            <h2 class="font-gaming text-3xl mb-8">Инфо</h2>
+            <p class="text-gray-400 leading-relaxed">
+                Здесь будет информация о создании организации 9ezEsports, её целях и истории. 
+                В данный момент страница находится в стадии наполнения.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-white/10 text-center">
+        <p class="text-gray-500 text-sm">&copy; 2024 9ezEsports. All rights reserved.</p>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></
+
+
+script>
+    <script>
+        // Инициализация анимаций
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out',
+        });
+
+        // Простая логика для мобильного меню (можно доработать)
+        const menuBtn = document.getElementById('menuBtn');
+        menuBtn.addEventListener('click', () => {
+            alert('Навигация: Ростер, Матчи, Достижения, Инфо');
+        });
+    </script>
+</body>
+</html>м
